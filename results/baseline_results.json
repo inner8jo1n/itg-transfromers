@@ -1,0 +1,22 @@
+{
+  "model": "distilbert-base-uncased",
+  "features": "cls",
+  "classifier": "LogisticRegression(max_iter=1000)",
+  "split_80_20": {
+    "macro_f1": 0.6349356195202257
+  },
+  "official": {
+    "train": {
+      "accuracy": 0.6852789652526581,
+      "macro_f1": 0.6622634419455871
+    },
+    "validation": {
+      "accuracy": 0.667,
+      "macro_f1": 0.6318674909377725
+    },
+    "test": {
+      "accuracy": 0.6596385542168675,
+      "macro_f1": 0.6498570453712617
+    }
+  }
+}

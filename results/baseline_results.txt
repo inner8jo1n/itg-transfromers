@@ -1,0 +1,34 @@
+Baseline: frozen distilbert-base-uncased CLS embeddings
+Classifier: LogisticRegression(max_iter=1000)
+
+80/20 stratified split of the train split (random_state=42)
+Macro F1: 0.6349
+
+              precision    recall  f1-score   support
+
+    negative      0.592     0.486     0.534      1419
+     neutral      0.653     0.707     0.679      4134
+    positive      0.701     0.684     0.692      3570
+
+    accuracy                          0.663      9123
+   macro avg      0.649     0.625     0.635      9123
+weighted avg      0.662     0.663     0.662      9123
+
+Official splits, regression fitted on the whole train split
+            accuracy  macro_f1
+train         0.6853    0.6623
+validation    0.6670    0.6319
+test          0.6596    0.6499
+
+Test split:
+              precision    recall  f1-score   support
+
+    negative      0.686     0.646     0.665      3972
+     neutral      0.663     0.690     0.676      5937
+    positive      0.609     0.607     0.608      2375
+
+    accuracy                          0.660     12284
+   macro avg      0.653     0.648     0.650     12284
+weighted avg      0.660     0.660     0.660     12284
+
+Trivial baseline on test (always 'neutral'): macro F1 0.2172

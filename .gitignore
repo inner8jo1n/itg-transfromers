@@ -32,3 +32,6 @@ dist/
 models/
 # Downloaded dataset (make data)
 data/
+
+# Saved plots
+figures/
