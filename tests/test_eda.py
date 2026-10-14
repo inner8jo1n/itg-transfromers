@@ -8,6 +8,7 @@ from itg_transformers.eda import (
     duplicates_summary,
     log_odds_z,
     matches,
+    pattern_error_rates,
     pattern_shares,
     sample_per_class,
     split_overlap,
@@ -140,3 +141,14 @@ def test_sample_per_class_takes_n_rows_of_every_class():
         "pos": 2,
     }
     assert set(sample.loc["neg"].index) <= {0, 1, 2}
+
+
+def test_pattern_error_rates_compares_tweets_with_and_without():
+    texts = pd.Series(["not good", "good", "not bad", "fine"])
+    correct = pd.Series([False, True, True, True])
+
+    rates = pattern_error_rates(texts, correct, {"negation": r"\bnot\b"})
+
+    assert rates.loc["negation", "tweets"] == 2
+    assert rates.loc["negation", "error_rate_with"] == 0.5
+    assert rates.loc["negation", "error_rate_without"] == 0.0

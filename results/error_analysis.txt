@@ -1,0 +1,78 @@
+=== ERROR ANALYSIS ===
+
+Fine-tuned DistilBERT on the 20% validation split (9,123 tweets)
+False positive: predicted positive, actually negative
+False negative: predicted negative, actually positive
+
+Total errors: 2628
+False Positives: 91
+False Negatives: 106
+
+All kinds of errors:
+                                    count  share of errors
+error                                                     
+true neutral → predicted positive     830             0.32
+true positive → predicted neutral     730             0.28
+true negative → predicted neutral     454             0.17
+true neutral → predicted negative     417             0.16
+true positive → predicted negative    106             0.04
+true negative → predicted positive     91             0.03
+
+Mean length of misclassified texts: 108
+Mean length of all texts: 106
+
+=== FALSE POSITIVE EXAMPLES ===
+
+Text: Heather is like the serpent in the garden trying 2 entice info from McBain! Michael Easton, dont ever go away that long! Watching Tues #GH.
+True: negative, predicted: positive (confidence 0.55)
+
+Text: BAY HEAD, N.J./BOSTON, Nov 2 (Reuters) - The people of the Jersey Shore may feel alone in the world right now, t...
+True: negative, predicted: positive (confidence 0.72)
+
+Text: First it turns out Meek Mill is an Arsenal fan, now this. I'm finding a new club. This is a Barcelona account now.
+True: negative, predicted: positive (confidence 0.70)
+
+Text: Thanks manager for putting me on the schedule for Sunday"
+True: negative, predicted: positive (confidence 0.93)
+
+Text: The best way to find Malaysia Airlines Flight MH370 may be with Michelle Obama's arms.
+True: negative, predicted: positive (confidence 0.94)
+
+=== FALSE NEGATIVE EXAMPLES ===
+
+Text: Gambled on Chocolate Day as a successful theme day at work..turns out chdn DO like chocolate. Wed. is Gross Day. Hope kids like gross stuff.
+True: positive, predicted: negative (confidence 0.58)
+
+Text: Damn. I would totally buy the Sun for this. @user Future of news again: Free Hawkeye Lego with Murdoch’s Sun
+True: positive, predicted: negative (confidence 0.73)
+
+Text: @user Harper gets first chance, most seats won get 2nd chance. Easy. Harper does not play well with others, ask Danny Williams.
+True: positive, predicted: negative (confidence 0.84)
+
+Text: 5th day in! I have lost the 1 kg I gained during Eid (that I had lost during Ramadan) 9 more to go! I have...
+True: positive, predicted: negative (confidence 0.55)
+
+Text: Just claimed a sandwich after the employee explicitly called out, "Cheese Trifecta for Demetria!" not my name or my order so happy tues guys
+True: positive, predicted: negative (confidence 0.57)
+
+=== OBSERVATIONS ===
+
+1. 93% of the errors involve the neutral class; negative and positive
+   are rarely confused with each other (FP + FN = 7.5% of errors).
+   Neutral is also the noisiest class of the labels (see the EDA).
+2. Typical causes in the examples: sarcasm (polite or funny wording,
+   negative meaning), negative words used positively ('damn', 'lost'),
+   news labelled by topic, and labels that are debatable themselves.
+3. Negation is hard: error rate 37% with 'not', 'n't', 'never'
+   against 27% without.
+4. Topic bias: tweets about Islam, the IRA or ISIS have an error rate
+   of 39% against 29%; on the official test split the model calls 96
+   of them negative where 66 are. Neutral reports on these topics are
+   labelled negative because training tweets on them mostly were.
+5. Longer tweets are harder: error rate 24.5% for the shortest fifth,
+   31.7% for the longest. They mix statements; truncation plays no role.
+6. The model is overconfident: at 0.85 confidence it is right 67% of
+   the time, at 0.98 only 90%. Errors still have lower confidence
+   (median 0.76 against 0.95), so low confidence flags doubtful cases.
+7. Not confirmed: emoji (unknown to the uncased vocabulary) and
+   capitals do not raise the error rate; emoticons like ':)' lower it.

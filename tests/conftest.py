@@ -5,6 +5,7 @@ import torch
 from tokenizers import Tokenizer, models, pre_tokenizers
 from transformers import (
     DistilBertConfig,
+    DistilBertForSequenceClassification,
     DistilBertModel,
     PreTrainedTokenizerFast,
 )
@@ -38,3 +39,14 @@ def tiny_model() -> DistilBertModel:
         vocab_size=4, dim=8, n_layers=1, n_heads=2, hidden_dim=16
     )
     return DistilBertModel(config).eval()
+
+
+@pytest.fixture
+def tiny_classifier() -> DistilBertForSequenceClassification:
+    """Randomly initialized one-layer DistilBERT with a 3-class head."""
+    torch.manual_seed(0)
+    config = DistilBertConfig(
+        vocab_size=4, dim=8, n_layers=1, n_heads=2, hidden_dim=16
+    )
+    config.num_labels = 3
+    return DistilBertForSequenceClassification(config)

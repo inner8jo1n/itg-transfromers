@@ -1,7 +1,7 @@
 [project]
 name = "itg-transformers"
 version = "0.1.0"
-description = "Add your description here"
+description = "Sentiment analysis of tweets with DistilBERT: a one-week transformers project"
 readme = "README.md"
 authors = [
     { name = "imiderji", email = "skishou.developer@yandex.ru" }
@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "datasets>=5.1.0",
+    "gradio>=6.30.0",
     "pandas>=3.0.6",
     "scikit-learn>=1.9.1",
     "seaborn>=0.13.2",

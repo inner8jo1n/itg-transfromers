@@ -176,3 +176,18 @@ def sample_per_class(
         for label, name in labels.items()
     }
     return pd.concat(parts, names=["label", "row"])
+
+
+def pattern_error_rates(
+    texts: pd.Series, correct: pd.Series, patterns: dict[str, str]
+) -> pd.DataFrame:
+    """Error rate of tweets with and without every pattern."""
+    rows = {}
+    for name, pattern in patterns.items():
+        has = matches(texts, pattern)
+        rows[name] = {
+            "tweets": int(has.sum()),
+            "error_rate_with": float(1 - correct[has].mean()),
+            "error_rate_without": float(1 - correct[~has].mean()),
+        }
+    return pd.DataFrame(rows).T

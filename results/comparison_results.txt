@@ -1,0 +1,26 @@
+=== Model comparison ===
+
+Test data: 20% stratified split of the train split (random_state=42),
+9,123 tweets neither model was trained on
+
+Fine-tuned Model:
+  F1 (macro): 0.6938
+  Accuracy: 0.7119
+
+Baseline Model:
+  F1 (macro): 0.6349
+  Accuracy: 0.6635
+
+Improvement: 9.26%
+
+F1 per class on the 20% split:
+          baseline  fine-tuned
+negative    0.5337      0.6207
+neutral     0.6787      0.7037
+positive    0.6924      0.7568
+
+Official test split (12,284 tweets, other topics):
+                           macro F1  accuracy
+fine-tuned, official test    0.6773    0.6796
+baseline, official test      0.6479    0.6565
+Improvement: 4.54%

@@ -17,3 +17,6 @@ MAX_LENGTH = 64
 FIGURES_DIR = PROJECT_ROOT / "figures"
 EMBEDDINGS_DIR = DATA_DIR / "embeddings"
 RESULTS_DIR = PROJECT_ROOT / "results"
+MODELS_DIR = PROJECT_ROOT / "models"
+FINE_TUNED_DIR = MODELS_DIR / "fine_tuned_model"
+BASELINE_PATH = MODELS_DIR / "baseline_model.pkl"
